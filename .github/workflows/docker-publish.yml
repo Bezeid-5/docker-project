@@ -24,4 +24,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: votre_utilisateur/mon_projet:latest
+        tags: DOCKER_USERNAME/app:latest

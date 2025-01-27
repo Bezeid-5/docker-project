@@ -24,4 +24,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: DOCKER_USERNAME/app:latest
+        tags: docker-project/app:latest

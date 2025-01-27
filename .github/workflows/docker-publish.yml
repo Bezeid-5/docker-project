@@ -24,4 +24,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: Bezeid/docker_project:latest
+        tags: bezeid/docker-project:latest

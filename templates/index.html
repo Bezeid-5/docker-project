@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Tic-Tac-Toe</h1>
+    <p>Joueur <span id="currentPlayer">X</span>, c'est à toi de jouer !</p>
+    <div class="board">
+        <div class="cell" onclick="playMove(0)"></div>
+        <div class="cell" onclick="playMove(1)"></div>
+        <div class="cell" onclick="playMove(2)"></div>
+        <div class="cell" onclick="playMove(3)"></div>
+        <div class="cell" onclick="playMove(4)"></div>
+        <div class="cell" onclick="playMove(5)"></div>
+        <div class="cell" onclick="playMove(6)"></div>
+        <div class="cell" onclick="playMove(7)"></div>
+        <div class="cell" onclick="playMove(8)"></div>
+    </div>
+    <p id="result"></p>
+    <button onclick="resetGame()">Recommencer</button>
+
+    <script>
+        let board = ["", "", "", "", "", "", "", "", ""];
+        let currentPlayer = "X";
+        let gameActive = true;
+
+        function playMove(index) {
+            if (board[index] === "" && gameActive) {
+                board[index] = currentPlayer;
+                document.getElementsByClassName("cell")[index].textContent = currentPlayer;
+                checkWinner();
+                currentPlayer = currentPlayer === "X" ? "O" : "X";
+                document.getElementById("currentPlayer").textContent = currentPlayer;
+            }
+        }
+
+        function checkWinner() {
+            const winPatterns = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                [0, 4, 8], [2, 4, 6]
+            ];
+
+            for (const pattern of winPatterns) {
+                const [a, b, c] = pattern;
+                if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+                    document.getElementById("result").textContent = `Le joueur ${board[a]} a gagné !`;
+                    gameActive = false;
+                    return;
+                }
+            }
+
+            if (!board.includes("")) {
+                document.getElementById("result").textContent = "Match nul !";
+                gameActive = false;
+            }
+        }
+
+        function resetGame() {
+            board = ["", "", "", "", "", "", "", "", ""];
+            gameActive = true;
+            currentPlayer = "X";
+            document.getElementById("currentPlayer").textContent = currentPlayer;
+            document.getElementById("result").textContent = "";
+            document.querySelectorAll(".cell").forEach(cell => cell.textContent = "");
+        }
+    </script>
+</body>
+</html>

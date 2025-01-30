@@ -7,6 +7,7 @@ WORKDIR /app
 # Étape 3 : Copier les fichiers nécessaires de l app 
 COPY requirements.txt .
 COPY app.py .
+COPY templates/ /app/templates/
 
 # Étape 4 : Installer les dépendances de l app dans le file  requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
